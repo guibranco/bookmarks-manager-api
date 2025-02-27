@@ -1,4 +1,4 @@
-# 🗄️🔖 Bookmarks Manager API
+# 🗄️🔖 Bookmarks Manager (API)
 
 A **RESTful API** for managing bookmarks, built with **PHP 8.3** and **MySQL**, using the **GuiBranco\Panckage** library for structured and efficient development. Designed to integrate seamlessly with the **Bookmark Manager UI** to store, organize, and retrieve bookmarks.
 
