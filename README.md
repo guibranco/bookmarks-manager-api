@@ -15,10 +15,10 @@ A **RESTful API** for managing bookmarks, built with **PHP 8.3** and **MySQL**, 
 - **Frontend**: [Bookmarks Manager UI](https://github.com/guibranco/bookmarks-manager-ui/)
 - **Backend**: PHP 8.3
 - **Database**: MySQL
-- **Libraries**: GuiBranco\Panckage
+- **Libraries**: [GuiBranco\Pancake](https://github.com/guibranco/pancake)
 - **Testing**: Unit and Integration Tests with PHPUnit
 - **Containerization**: Docker
-- **CI/CD**: GitHub Actions for database migrations
+- **CI/CD**: GitHub Actions for build, test, database migrations, and deployments 
 
 ## 📦 Installation
 
