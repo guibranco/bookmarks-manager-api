@@ -1,0 +1,28 @@
+version = 1
+
+test_patterns = [
+  "tests/**/*.cs"
+]
+
+exclude_patterns = [
+  "**/bin/**",
+  "**/obj/**",
+  "docs/**",
+  "seed/sample.json"
+]
+
+[[analyzers]]
+name = "csharp"
+enabled = true
+
+[[analyzers]]
+name = "docker"
+enabled = true
+
+[[analyzers]]
+name = "secrets"
+enabled = true
+
+[[analyzers]]
+name = "test-coverage"
+enabled = true
