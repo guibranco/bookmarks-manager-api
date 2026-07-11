@@ -8,6 +8,17 @@ theme: just-the-docs
 url: https://guibranco.github.io
 baseurl: /bookmarks-manager-api
 
+# ── Layout defaults ──────────────────────────────────────────────────────────
+# just-the-docs is a gem-based theme: Jekyll does not inherit page defaults from
+# the theme's own _config.yml, so every page needs `layout: default` explicitly
+# set here (or in its own front matter) or it renders with no theme at all.
+# index.md overrides this with `layout: home` in its own front matter.
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
 # ── Navigation ──────────────────────────────────────────────────────────────
 nav_sort: order
 heading_anchors: true
