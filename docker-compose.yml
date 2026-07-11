@@ -1,0 +1,44 @@
+services:
+  api:
+    build:
+      context: .
+    image: ghcr.io/guibranco/bookmarks-manager-api:latest
+    container_name: bookmarks-manager-api
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ApiKey: ${BOOKMARKS_MANAGER_API_KEY}
+      Database__Provider: MariaDb
+      Database__MariaDbServerVersion: ${MARIADB_SERVER_VERSION:-10.11.6-mariadb}
+      ConnectionStrings__Default: ${BOOKMARKS_MANAGER_CONNECTION_STRING}
+      Cors__AllowedOrigins__0: ${FRONTEND_ORIGIN}
+    volumes:
+      - /var/log/bookmarks-manager:/var/log/bookmarks-manager
+    expose:
+      - "8080"
+    networks:
+      - bookmarksnet
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: bookmarks-manager-nginx
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/nginx/bookmarks-manager-api.conf:/etc/nginx/conf.d/default.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    networks:
+      - bookmarksnet
+
+networks:
+  bookmarksnet:
+    driver: bridge

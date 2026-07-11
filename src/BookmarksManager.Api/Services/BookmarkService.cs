@@ -107,7 +107,10 @@ public class BookmarkService(AppDbContext db)
     {
         var names = Validation.NormalizeTags(rawTags);
 
-        var existingTags = await db.Tags.Where(t => names.Contains(t.Name)).ToListAsync(ct);
+        // List<T>.Contains (rather than an array) so EF Core translates this to a SQL IN clause
+        // instead of trying to resolve System.MemoryExtensions' span-based Contains overload.
+        var namesList = names.ToList();
+        var existingTags = await db.Tags.Where(t => namesList.Contains(t.Name)).ToListAsync(ct);
         var missingNames = names.Except(existingTags.Select(t => t.Name)).ToArray();
         var newTags = missingNames.Select(name => new Tag { Name = name }).ToList();
         if (newTags.Count > 0)
