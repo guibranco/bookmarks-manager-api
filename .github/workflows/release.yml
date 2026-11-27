@@ -135,7 +135,7 @@ jobs:
         uses: softprops/action-gh-release@v3
         with:
           tag_name: v${{ needs.build-and-test.outputs.fullSemVer }}
-          name: v${{ needs.build-and-test.outputs.fullSemVer }}
+          name: Release v${{ needs.build-and-test.outputs.fullSemVer }}
           target_commitish: ${{ github.sha }}
           generate_release_notes: true
           make_latest: true
